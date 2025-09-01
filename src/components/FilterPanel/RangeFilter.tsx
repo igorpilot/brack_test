@@ -1,0 +1,41 @@
+interface RangeFilterProps {
+  label: string;
+  minValue?: number;
+  maxValue?: number;
+  onChangeMin: (val?: number) => void;
+  onChangeMax: (val?: number) => void;
+}
+
+export const RangeFilter = ({
+  label,
+  minValue,
+  maxValue,
+  onChangeMin,
+  onChangeMax,
+}: RangeFilterProps) => (
+  <div>
+    <label className="block text-sm font-semibold mb-1 text-yellow-400">
+      {label}
+    </label>
+    <div className="flex gap-2">
+      <input
+        type="number"
+        placeholder="Min"
+        className="input"
+        value={minValue ?? ""}
+        onChange={(e) =>
+          onChangeMin(e.target.value ? Number(e.target.value) : undefined)
+        }
+      />
+      <input
+        type="number"
+        placeholder="Max"
+        className="input"
+        value={maxValue ?? ""}
+        onChange={(e) =>
+          onChangeMax(e.target.value ? Number(e.target.value) : undefined)
+        }
+      />
+    </div>
+  </div>
+);

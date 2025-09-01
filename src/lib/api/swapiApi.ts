@@ -32,6 +32,7 @@ export async function fetchPeople({
     return { results: [], count: 0, next: null, previous: null };
   }
 }
+
 export async function fetchHero(id: string): Promise<Hero | null> {
   try {
     const url = `${SWAPI_PEOPLE_API_URL}/${id}/`;
