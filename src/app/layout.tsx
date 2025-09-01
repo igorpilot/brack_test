@@ -22,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={orbitron.className}>
       <body className="">
-        <Header/>
+        <Header />
         {children}
-      <Footer/>
+        <Footer />
       </body>
     </html>
   );
