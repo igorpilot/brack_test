@@ -1,24 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/constants/routes";
-import HeroCarousel from "@/components/Heroes/HeroesCarousel";
-import HomeIntro from "@/components/HomeIntro";
-import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Home | AllianceBook",
-  description: "Welcome to AllianceBook – explore Star Wars heroes!",
-};
+import {HeroCarousel} from "@/components/Heroes/HeroesCarousel";
+import {HomeIntro} from "@/components/HomeIntro";
+
 export default function Home() {
   const [introDone, setIntroDone] = useState<boolean>(false);
+  const handleKeyDown = useCallback(() => setIntroDone(true), []);
   useEffect(() => {
-    const handleKeyDown = () => setIntroDone(true);
+    if (typeof window === "undefined") return;
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
   return (
     <div className="relative bg-transparent text-white overflow-hidden">
       {!introDone && <HomeIntro onEnd={() => setIntroDone(true)} />}

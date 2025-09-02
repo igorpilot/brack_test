@@ -1,16 +1,16 @@
 import Link from "next/link";
-
+interface NavLinkProps {
+  href: string;
+  label: string;
+  active?: boolean;
+  onClick?: () => void;
+}
 export const NavLink = ({
   href,
   label,
   active,
   onClick,
-}: {
-  href: string;
-  label: string;
-  active?: boolean;
-  onClick?: () => void;
-}) => {
+}: NavLinkProps) => {
   return (
     <Link
       href={href}

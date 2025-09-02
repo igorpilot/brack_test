@@ -18,7 +18,7 @@ export const Pagination = ({
 
   const pages = useMemo(
     () => getPaginationPages(page, totalPages),
-    [page, totalPages],
+    [page, totalPages]
   );
 
   if (totalPages <= 1) return null;
@@ -56,7 +56,7 @@ export const Pagination = ({
           >
             {p}
           </button>
-        ),
+        )
       )}
 
       <PaginationButton

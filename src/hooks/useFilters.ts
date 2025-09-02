@@ -4,28 +4,25 @@ import { useEffect, useState } from "react";
 
 export const useFilters = (onChange: (filters: Filters) => void) => {
   const searchParams = useSearchParams();
-  const [filters, setFilters] = useState<Filters>(() => {
+  const parseFilters = (): Filters => {
     const initial: Filters = {};
-    if (searchParams) {
-      if (searchParams.get("gender"))
-        initial.gender = searchParams.get("gender")!;
-      if (searchParams.get("hair_color"))
-        initial.hair_color = searchParams.get("hair_color")!;
-      if (searchParams.get("skin_color"))
-        initial.skin_color = searchParams.get("skin_color")!;
-      if (searchParams.get("eye_color"))
-        initial.eye_color = searchParams.get("eye_color")!;
-      if (searchParams.get("heightMin"))
-        initial.heightMin = Number(searchParams.get("heightMin"));
-      if (searchParams.get("heightMax"))
-        initial.heightMax = Number(searchParams.get("heightMax"));
-      if (searchParams.get("massMin"))
-        initial.massMin = Number(searchParams.get("massMin"));
-      if (searchParams.get("massMax"))
-        initial.massMax = Number(searchParams.get("massMax"));
-    }
+    if (!searchParams) return initial;
+    const getString = (key: keyof Filters) => searchParams.get(key as string) || undefined;
+    const getNumber = (key: keyof Filters) => {
+      const val = searchParams.get(key as string);
+      return val !== null && val !== "" ? Number(val) : undefined;
+    };
+    initial.gender = getString("gender");
+    initial.hair_color = getString("hair_color");
+    initial.skin_color = getString("skin_color");
+    initial.eye_color = getString("eye_color");
+    initial.heightMin = getNumber("heightMin");
+    initial.heightMax = getNumber("heightMax");
+    initial.massMin = getNumber("massMin");
+    initial.massMax = getNumber("massMax");
     return initial;
-  });
+  };
+  const [filters, setFilters] = useState<Filters>(parseFilters);
 
   useEffect(() => {
     onChange(filters);

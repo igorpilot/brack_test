@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [new URL("https://vieraboschkova.github.io/**")],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'vieraboschkova.github.io',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   eslint: {
     dirs: ["src"],

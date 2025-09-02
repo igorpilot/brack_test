@@ -1,12 +1,13 @@
 "use client";
 
-import { Hero, HeroResponse } from "@/types/swapiTypes";
-import { HeroCard } from "./HeroCard";
+import { HeroResponse } from "@/types/swapiTypes";
 import { SearchBar } from "./SearchBar";
 import { useQueryUpdater } from "@/hooks/useQueryUpdate";
 import { Pagination } from "./Pagination";
 import { useState } from "react";
 import { FilterPanel } from "../FilterPanel/FilterPanel";
+import { EmptyState } from "./EmptyState";
+import { HeroGrid } from "./HeroGrid";
 interface Props {
   initialData: HeroResponse;
   page: number;
@@ -24,18 +25,24 @@ export const HeroesList = ({ initialData, page, search }: Props) => {
           <button
             onClick={() => setShowFilters(true)}
             className="px-4 py-2 bg-yellow-400 text-black rounded-lg font-semibold"
+            aria-label="Show filters"
           >
             Filters
           </button>
         </div>
 
         <aside
-          className={`w-full md:w-64 ${showFilters ? "fixed inset-0 z-20 bg-gray-900/95 p-4" : "hidden md:block"}`}
+          className={`w-full md:w-64 ${
+            showFilters
+              ? "fixed inset-0 z-20 bg-gray-900/95 p-4"
+              : "hidden md:block"
+          }`}
         >
           <div className="flex justify-end md:hidden mb-4">
             <button
               onClick={() => setShowFilters(false)}
               className="px-2 py-1 text-yellow-400 font-bold"
+              aria-label="Close filters"
             >
               Close
             </button>
@@ -61,20 +68,3 @@ export const HeroesList = ({ initialData, page, search }: Props) => {
     </div>
   );
 };
-
-const EmptyState = () => (
-  <div className="flex flex-col items-center justify-center mt-12 text-center">
-    <p className="text-2xl font-semibold text-yellow-400 mb-2">
-      No heroes found
-    </p>
-    <p className="text-gray-400">Try adjusting your search or filters.</p>
-  </div>
-);
-
-const HeroGrid = ({ heroes }: { heroes: Hero[] }) => (
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-6">
-    {heroes.map((hero) => (
-      <HeroCard key={hero.url} hero={hero} />
-    ))}
-  </div>
-);

@@ -29,7 +29,7 @@ export async function fetchPeople({
     return res.json();
   } catch (error) {
     console.error(`[SWAPI FETCH FAILED]:`, error);
-    return { results: [], count: 0, next: null, previous: null };
+    return EMPTY_RESPONSE;
   }
 }
 
@@ -41,7 +41,7 @@ export async function fetchHero(id: string): Promise<Hero | null> {
     });
     if (!res.ok) {
       console.error(
-        `[SWAPI ERROR]: ${res.status} ${res.statusText} for hero ID ${id}`,
+        `[SWAPI ERROR]: ${res.status} ${res.statusText} for hero ID ${id}`
       );
 
       return EMPTY_HERO;

@@ -10,7 +10,9 @@ export const SelectFilter = ({
   value,
   options,
   onChange,
-}: SelectFilterProps) => (
+}: SelectFilterProps) => {
+    const sortedOptions = [...options].sort();
+    return(
   <div>
     <label className="block text-sm font-semibold mb-1 text-yellow-400">
       {label}
@@ -21,7 +23,7 @@ export const SelectFilter = ({
       className="select"
     >
       <option value="">{`All ${label}`}</option>
-      {options.sort().map((opt) => (
+      {sortedOptions.map((opt) => (
         <option key={opt.toLowerCase()} value={opt.toLowerCase()}>
           {opt}
         </option>
@@ -29,3 +31,4 @@ export const SelectFilter = ({
     </select>
   </div>
 );
+}

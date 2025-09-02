@@ -76,6 +76,7 @@ export const FilterPanel = ({ onChange }: Props) => {
           type="button"
           onClick={resetFilters}
           className="px-3 py-1 text-sm bg-gray-700 text-yellow-400 rounded hover:bg-gray-600 transition"
+          aria-label="Reset filters"
         >
           Reset Filters
         </button>

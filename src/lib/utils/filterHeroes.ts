@@ -1,4 +1,4 @@
-import { HeroResponse } from "@/types/swapiTypes";
+import { Hero, HeroResponse } from "@/types/swapiTypes";
 
 export const parseParams = (params: Record<string, string>) => ({
   page: Number(params.page) || 1,
@@ -17,7 +17,7 @@ export const filterHeroes = (
   results: HeroResponse["results"],
   filters: ReturnType<typeof parseParams>,
 ) => {
-  return results.filter((hero) => {
+  return results.filter((hero: Hero) => {
     if (
       filters.gender &&
       hero.gender.toLowerCase() !== filters.gender.toLowerCase()

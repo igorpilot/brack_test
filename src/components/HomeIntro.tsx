@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { introTexts } from "@/data/introTexts";
 
-export default function HomeIntro({ onEnd }: { onEnd: () => void }) {
+export const HomeIntro = ({ onEnd }: { onEnd: () => void }) => {
   const [fadeOut, setFadeOut] = useState<boolean>(false);
 
   useEffect(() => {
@@ -13,14 +13,16 @@ export default function HomeIntro({ onEnd }: { onEnd: () => void }) {
 
     return () => clearTimeout(timer);
   }, [onEnd]);
-
+  const handleSkip = useCallback(() => {
+    setFadeOut(true);
+    setTimeout(onEnd, 500);
+  }, [onEnd]);
   return (
     <div
-      className={`fixed inset-0 bg-black z-50 flex items-center justify-center overflow-hidden transition-opacity duration-[1500ms] ${fadeOut ? "opacity-0" : "opacity-100"}`}
-      onClick={() => {
-        setFadeOut(true);
-        onEnd();
-      }}
+      className={`fixed inset-0 bg-black z-50 flex items-center justify-center overflow-hidden transition-opacity duration-[1500ms] ${
+        fadeOut ? "opacity-0" : "opacity-100"
+      }`}
+      onClick={handleSkip}
     >
       <div className="intro-wrapper relative w-full h-full perspective-[400px]">
         <div className="crawl absolute bottom-[-100%] w-full text-center text-yellow-400 text-3xl font-bold leading-snug animate-crawl">
@@ -36,4 +38,4 @@ export default function HomeIntro({ onEnd }: { onEnd: () => void }) {
       </div>
     </div>
   );
-}
+};

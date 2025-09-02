@@ -1,8 +1,8 @@
 import { formatDate } from "@/lib/utils/formatDate";
 import { Hero } from "@/types/swapiTypes";
 import Link from "next/link";
-
-export const heroesCardDetails = (hero: Hero) => {
+type DetailRow = { label: string; value: React.ReactNode };
+export const heroesCardDetails = (hero: Hero): DetailRow[] => {
   return [
     { label: "Gender", value: hero.gender },
     { label: "Birth", value: hero.birth_year },
@@ -13,7 +13,7 @@ export const heroesCardDetails = (hero: Hero) => {
     { label: "Eyes", value: hero.eye_color },
   ];
 };
-export const heroAllDetails = (hero: Hero) => {
+export const heroAllDetails = (hero: Hero): DetailRow[] => {
   return [
     ...heroesCardDetails(hero),
     {

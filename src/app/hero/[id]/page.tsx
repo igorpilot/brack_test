@@ -25,11 +25,11 @@ interface HeroPageProps {
 }
 
 export default async function HeroDetailPage({ params }: HeroPageProps) {
-  const { id } = await params;
+  const { id } = params;
   const hero = await fetchHero(id);
   if (!hero) return notFound();
   const imageUrl = getHeroImage(id);
-  const pageUrl = ROUTES.BASE_URR + ROUTES.HERO(id);
+  const pageUrl = ROUTES.BASE_URL + ROUTES.HERO(id);
 
   return (
     <div className="relative min-h-screen bg-gray-900/80 ">

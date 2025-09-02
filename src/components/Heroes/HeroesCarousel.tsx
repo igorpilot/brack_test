@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { heroesForCarousel } from "@/data/heroesInfo";
 
-export default function HeroCarousel() {
+export const HeroCarousel = () => {
   const [angle, setAngle] = useState(0);
 
   useEffect(() => {
@@ -13,7 +13,10 @@ export default function HeroCarousel() {
     }, 30);
     return () => clearInterval(interval);
   }, []);
-
+  const itemAngles = useMemo(
+    () => heroesForCarousel.map((_, i) => (360 / heroesForCarousel.length) * i),
+    []
+  );
   return (
     <div className="relative w-full h-[300px] sm:h-[400px]  overflow-hidden flex justify-center">
       <div
@@ -25,13 +28,12 @@ export default function HeroCarousel() {
         }}
       >
         {heroesForCarousel.map((hero, i) => {
-          const itemAngle = (360 / heroesForCarousel.length) * i;
           return (
             <div
               key={hero.name}
               className="absolute w-40 sm:w-44 xs:w-32 h-64 sm:h-72 xs:h-52 rounded-xl overflow-hidden shadow-2xl group"
               style={{
-                transform: `rotateY(${itemAngle}deg) translateZ(300px)`,
+                transform: `rotateY(${itemAngles[i]}deg) translateZ(300px)`,
               }}
             >
               <Image
@@ -50,4 +52,4 @@ export default function HeroCarousel() {
       </div>
     </div>
   );
-}
+};

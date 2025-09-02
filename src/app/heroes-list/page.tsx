@@ -22,7 +22,7 @@ interface PageProps {
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  const params = parseParams(await searchParams);
+  const params = parseParams(searchParams);
   const data = await fetchPeople({ page: params.page, search: params.search });
   const filteredResults = filterHeroes(data.results, params);
   return (
