@@ -41,7 +41,7 @@ export async function fetchHero(id: string): Promise<Hero | null> {
     });
     if (!res.ok) {
       console.error(
-        `[SWAPI ERROR]: ${res.status} ${res.statusText} for hero ID ${id}`
+        `[SWAPI ERROR]: ${res.status} ${res.statusText} for hero ID ${id}`,
       );
 
       return EMPTY_HERO;

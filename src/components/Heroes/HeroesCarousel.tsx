@@ -15,7 +15,7 @@ export const HeroCarousel = () => {
   }, []);
   const itemAngles = useMemo(
     () => heroesForCarousel.map((_, i) => (360 / heroesForCarousel.length) * i),
-    []
+    [],
   );
   return (
     <div className="relative w-full h-[300px] sm:h-[400px]  overflow-hidden flex justify-center">

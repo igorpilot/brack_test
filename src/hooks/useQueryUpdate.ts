@@ -11,16 +11,16 @@ export const useQueryUpdater = ({ page }: { page: number }) => {
       const newParams = updateQueryParams(updates);
       router.push(`${ROUTES.HEROES_LIST}?${newParams}`);
     },
-    [router]
+    [router],
   );
 
   const handlePageChange = useCallback(
     (newPage: number) => setQuery({ page: String(newPage) }),
-    [setQuery]
+    [setQuery],
   );
   const handleSearchChange = useCallback(
     (q: string) => setQuery({ search: q, page: "1" }),
-    [setQuery]
+    [setQuery],
   );
   const handleFiltersChange = useCallback(
     (filters: Filters) => {
@@ -33,12 +33,12 @@ export const useQueryUpdater = ({ page }: { page: number }) => {
           if (v !== undefined && v !== "") acc[k] = String(v);
           return acc;
         },
-        {}
+        {},
       );
       updates.page = `${page}`;
       setQuery(updates);
     },
-    [router, page, setQuery]
+    [router, page, setQuery],
   );
   return { handlePageChange, handleSearchChange, handleFiltersChange };
 };

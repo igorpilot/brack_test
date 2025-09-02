@@ -5,12 +5,7 @@ interface NavLinkProps {
   active?: boolean;
   onClick?: () => void;
 }
-export const NavLink = ({
-  href,
-  label,
-  active,
-  onClick,
-}: NavLinkProps) => {
+export const NavLink = ({ href, label, active, onClick }: NavLinkProps) => {
   return (
     <Link
       href={href}

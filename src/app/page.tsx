@@ -3,8 +3,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/constants/routes";
-import {HeroCarousel} from "@/components/Heroes/HeroesCarousel";
-import {HomeIntro} from "@/components/HomeIntro";
+import { HeroCarousel } from "@/components/Heroes/HeroesCarousel";
+import { HomeIntro } from "@/components/HomeIntro";
 
 export default function Home() {
   const [introDone, setIntroDone] = useState<boolean>(false);

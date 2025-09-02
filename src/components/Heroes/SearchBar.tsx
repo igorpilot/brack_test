@@ -4,10 +4,7 @@ interface SearchBarProps {
   value: string;
   onChange: (v: string) => void;
 }
-export const SearchBar = ({
-  value,
-  onChange,
-}: SearchBarProps) => {
+export const SearchBar = ({ value, onChange }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState(value);
   const debouncedValue = useDebounce(inputValue, 100);
 

@@ -7,7 +7,8 @@ export const useFilters = (onChange: (filters: Filters) => void) => {
   const parseFilters = (): Filters => {
     const initial: Filters = {};
     if (!searchParams) return initial;
-    const getString = (key: keyof Filters) => searchParams.get(key as string) || undefined;
+    const getString = (key: keyof Filters) =>
+      searchParams.get(key as string) || undefined;
     const getNumber = (key: keyof Filters) => {
       const val = searchParams.get(key as string);
       return val !== null && val !== "" ? Number(val) : undefined;
