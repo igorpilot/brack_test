@@ -17,8 +17,9 @@ export const HeroesList = ({ initialData, page, search }: Props) => {
     useQueryUpdater({ page });
   const [showFilters, setShowFilters] = useState(false);
   return (
-    <div className="min-h-screen overflow-hidden">
-      <div className="p-4 flex flex-col md:flex-row gap-6 rounded-xl">
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="absolute inset-0 bg-stars z-0" />
+      <div className="relative p-4 flex flex-col md:flex-row gap-6 rounded-xl bg-gray-900/80">
         <div className="md:hidden mb-4">
           <button
             onClick={() => setShowFilters(true)}

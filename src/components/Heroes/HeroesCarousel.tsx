@@ -6,7 +6,7 @@ import { heroesForCarousel } from "@/data/heroesInfo";
 
 export default function HeroCarousel() {
   const [angle, setAngle] = useState(0);
-    
+
   useEffect(() => {
     const interval = setInterval(() => {
       setAngle((prev) => prev + 0.3);

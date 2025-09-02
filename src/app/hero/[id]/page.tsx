@@ -5,21 +5,37 @@ import { CopyButton } from "@/components/CopyButton";
 import { getHeroImage } from "@/lib/utils/getIdOrImg";
 import { fetchHero } from "@/lib/api/swapiApi";
 import { heroAllDetails } from "@/data/heroesInfo";
+import { Metadata } from "next";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const hero = await fetchHero(params.id);
+  return {
+    title: hero ? `${hero.name} | AllianceBook` : "Hero | AllianceBook",
+    description: hero
+      ? `Details about ${hero.name} from the Star Wars universe.`
+      : "Hero details page.",
+  };
+}
 interface HeroPageProps {
   params: { id: string };
 }
 
 export default async function HeroDetailPage({ params }: HeroPageProps) {
-  const hero = await fetchHero(params.id);
+  const { id } = await params;
+  const hero = await fetchHero(id);
   if (!hero) return notFound();
-  const imageUrl = getHeroImage(params.id);
-  const pageUrl = ROUTES.BASE_URR + ROUTES.HERO(params.id);
+  const imageUrl = getHeroImage(id);
+  const pageUrl = ROUTES.BASE_URR + ROUTES.HERO(id);
 
   return (
-    <div className="min-h-screen">
-      <div className="container mx-auto p-4 min-h-screen ">
-        <div className="flex flex-col md:flex-row gap-8 rounded-xl p-6 shadow-lg">
+    <div className="relative min-h-screen bg-gray-900/80 ">
+      <div className="absolute inset-0 bg-stars bg-cover bg-center z-0" />
+      <div className="relative z-10 container mx-auto p-4 min-h-screen bg-gray-900/80">
+        <div className="flex flex-col md:flex-row gap-8 rounded-xl p-6 shadow-lg bg-gray-900/80">
           <div className="flex-shrink-0 w-full md:w-1/3 max-w-xs mx-auto md:mx-0 rounded-xl overflow-hidden">
             <Image
               src={imageUrl}

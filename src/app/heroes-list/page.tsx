@@ -1,6 +1,11 @@
 import { HeroesList } from "@/components/Heroes/HeroesList";
 import { fetchPeople } from "@/lib/api/swapiApi";
 import { filterHeroes, parseParams } from "@/lib/utils/filterHeroes";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Heroes List | AllianceBook",
+  description: "Browse your favorite Star Wars heroes.",
+};
 interface PageProps {
   searchParams: Partial<{
     page: string;
